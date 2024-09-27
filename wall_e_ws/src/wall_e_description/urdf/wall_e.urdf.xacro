@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wall_e">
+
+    <link name="base_footprint">
+
+    </link>
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.0149221892000711 0.0791402928659503 0.0685532128175984"
+        rpy="0 0 0" />
+      <mass
+        value="1.41415126127045" />
+      <inertia
+        ixx="0.0102795735791383"
+        ixy="1.27187727331604E-09"
+        ixz="6.56701848981784E-08"
+        iyy="0.0129423397475402"
+        iyz="2.60947122320625E-05"
+        izz="0.00310768355824767" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Body.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Body.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin rpy="0 0 0" xyz="0 0 0.033"/>
+    </joint>
+
+
+  <link
+    name="Front_Left_Wheel">
+    <inertial>
+      <origin
+        xyz="5.55111512312578E-17 0.015 -5.55111512312578E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.104261024893665" />
+      <inertia
+        ixx="3.75784516057514E-05"
+        ixy="2.86174098456648E-22"
+        ixz="0"
+        iyy="6.1107497194996E-05"
+        iyz="1.37800244009481E-22"
+        izz="3.75784516057514E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Front_Left_Wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Front_Left_Wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint1"
+    type="continuous">
+    <origin
+      xyz="0.11285 -0.16498 0.048102"
+      rpy="3.1416 0.87981 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="Front_Left_Wheel" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="10"
+      velocity="10" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
+  </joint>
+  <link
+    name="Front_Right_Wheel">
+    <inertial>
+      <origin
+        xyz="-5.55111512312578E-17 -0.015 1.38777878078145E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.104261024893665" />
+      <inertia
+        ixx="3.75784516057513E-05"
+        ixy="-1.74832828168085E-22"
+        ixz="0"
+        iyy="6.1107497194996E-05"
+        iyz="5.28856994197548E-22"
+        izz="3.75784516057513E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Front_Right_Wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Front_Right_Wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint2"
+    type="continuous">
+    <origin
+      xyz="-0.08301 -0.16498 0.048102"
+      rpy="3.1416 0.49133 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="Front_Right_Wheel" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="10"
+      velocity="10" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
+  </joint>
+  <link
+    name="Back_Left_Wheel">
+    <inertial>
+      <origin
+        xyz="-2.08166817117217E-17 0.015 2.77555756156289E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.104261024893665" />
+      <inertia
+        ixx="3.75784516057514E-05"
+        ixy="2.79490905093828E-22"
+        ixz="0"
+        iyy="6.1107497194996E-05"
+        iyz="-3.36655961863459E-22"
+        izz="3.75784516057514E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Back_Left_Wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Back_Left_Wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint3"
+    type="continuous">
+    <origin
+      xyz="0.11285 0.027952 0.048102"
+      rpy="3.1416 0.81738 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="Back_Left_Wheel" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="10"
+      velocity="10" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
+  </joint>
+  <link
+    name="Back_Right_Wheel">
+    <inertial>
+      <origin
+        xyz="0 -0.015 6.93889390390723E-18"
+        rpy="0 0 0" />
+      <mass
+        value="0.104261024893665" />
+      <inertia
+        ixx="3.75784516057514E-05"
+        ixy="5.44261580910539E-24"
+        ixz="0"
+        iyy="6.1107497194996E-05"
+        iyz="-2.9089336076258E-23"
+        izz="3.75784516057514E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Back_Right_Wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wall_e_description/meshes/Back_Right_Wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint4"
+    type="continuous">
+    <origin
+      xyz="-0.08301 0.027952 0.048102"
+      rpy="3.1416 0.92219 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="Back_Right_Wheel" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="10"
+      velocity="10" />
+    <dynamics
+      damping="0.1"
+      friction="0.1" />
+  </joint>
+</robot>
