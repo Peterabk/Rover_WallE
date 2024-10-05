@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot name="wall_e" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!--
+    <transmission name="front_wheel_right_transmission">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <joint name="front_right_wheel" role="joint_right">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+        <actuator name="front_right_wheel_motor" role="actuator_right"/>
+    </transmission>
+
+    <transmission name="back_wheel_right_transmission">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <joint name="back_right_wheel" role="joint_right">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+        <actuator name="back_right_wheel_motor" role="actuator_right"/>
+    </transmission>
+
+    <transmission name="front_wheel_left_transmission">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <joint name="front_left_wheel" role="joint_left">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+        <actuator name="front_left_wheel_motor" role="actuator_left"/>
+    </transmission>
+
+    <transmission name="back_wheel_left_transmission">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <joint name="back_left_wheel" role="joint_left">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+        <actuator name="back_left_wheel_motor" role="actuator_left"/>
+    </transmission>
+    -->
+    <gazebo reference="Front_Right_Wheel">
+        <mu1>100000000000000.0</mu1>
+        <mu2>100000000000000.0</mu2>
+        <kp>1000000000000.0</kp>
+        <kd>10.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo reference="Front_Left_Wheel">
+        <mu1>100000000000000.0</mu1>
+        <mu2>100000000000000.0</mu2>
+        <kp>1000000000000.0</kp>
+        <kd>10.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo reference="Back_Right_Wheel">
+        <mu1>100000000000000.0</mu1>
+        <mu2>100000000000000.0</mu2>
+        <kp>1000000000000.0</kp>
+        <kd>10.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <gazebo reference="Back_Left_Wheel">
+        <mu1>100000000000000.0</mu1>
+        <mu2>100000000000000.0</mu2>
+        <kp>1000000000000.0</kp>
+        <kd>10.0</kd>
+        <minDepth>0.001</minDepth>
+        <maxVel>0.1</maxVel>
+        <fdir1>1 0 0</fdir1>
+    </gazebo>
+
+    <!-- 
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher</robot_param_node>
+            <parameters>$(find bumperbot_controller)/config/bumperbot_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+    -->
+
+</robot>
