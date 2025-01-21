@@ -14,7 +14,7 @@
     <!-- Transmission for Back Right Wheel -->
     <transmission name="BR_Transmission">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="Br_joint">
+        <joint name="BR_joint">
             <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
         </joint>
         <actuator name="BR_Motor">

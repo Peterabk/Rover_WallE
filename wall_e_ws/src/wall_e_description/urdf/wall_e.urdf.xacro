@@ -11,22 +11,22 @@
     <child link="base_link"/>
     <origin rpy="0 0 0" xyz="0 0 0.02"/>
   </joint>
-
+  
   <link
     name="base_link">
     <inertial>
       <origin
-        xyz="0.0155792528368141 -3.13584449863485E-05 -0.043885278180218"
+        xyz="0.00809763256593836 -0.000562322358044154 -0.0289427041542462"
         rpy="0 0 0" />
       <mass
-        value="7.30051365588478" />
+        value="0.98435044127488" />
       <inertia
-        ixx="0.0307878292952919"
-        ixy="-7.35451053591693E-06"
-        ixz="1.00519054145349E-05"
-        iyy="0.0629723510018648"
-        iyz="-8.74590698168669E-07"
-        izz="0.0877757846541169" />
+        ixx="0.00719634458823369"
+        ixy="-2.65438242709729E-09"
+        ixz="3.80350663889404E-08"
+        iyy="0.00694500656023865"
+        iyz="-1.52985888763549E-09"
+        izz="0.0123629441660506" />
     </inertial>
     <visual>
       <origin
@@ -56,17 +56,17 @@
     name="BR_link">
     <inertial>
       <origin
-        xyz="2.9442E-08 0.05681 -1.1142E-07"
+        xyz="0 0.02152 0"
         rpy="0 0 0" />
       <mass
-        value="0.70354" />
+        value="0.42795" />
       <inertia
-        ixx="0.00045383"
-        ixy="2.2319E-09"
-        ixz="-2.0047E-08"
-        iyy="0.00059175"
-        iyz="-2.9703E-09"
-        izz="0.00045385" />
+        ixx="0.00040313"
+        ixy="4.2213E-22"
+        ixz="-2.2648E-36"
+        iyy="0.00067844"
+        iyz="9.9268E-21"
+        izz="0.00040313" />
     </inertial>
     <visual>
       <origin
@@ -96,7 +96,7 @@
     name="BR_joint"
     type="continuous">
     <origin
-      xyz="-0.26698 -0.2513 -0.1585"
+      xyz="-0.082838 -0.1596 -0.1041"
       rpy="0 0 0" />
     <parent
       link="base_link" />
@@ -109,17 +109,17 @@
     name="FR_link">
     <inertial>
       <origin
-        xyz="-1.3001E-07 0.05681 -1.2687E-07"
+        xyz="2.7756E-17 0.02152 0"
         rpy="0 0 0" />
       <mass
-        value="0.70354" />
+        value="0.42795" />
       <inertia
-        ixx="0.00045383"
-        ixy="-6.1874E-10"
-        ixz="2.0686E-08"
-        iyy="0.00059175"
-        iyz="-2.702E-09"
-        izz="0.00045385" />
+        ixx="0.00040313"
+        ixy="4.5137E-22"
+        ixz="-1.0801E-37"
+        iyy="0.00067844"
+        iyz="9.9268E-21"
+        izz="0.00040313" />
     </inertial>
     <visual>
       <origin
@@ -127,7 +127,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://wall_e_description/meshes/FR_link.STL"  />
+          filename="package://wall_e_description/meshes/FR_link.STL" />
       </geometry>
       <material
         name="">
@@ -141,7 +141,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://wall_e_description/meshes/FR_link.STL"  />
+          filename="package://wall_e_description/meshes/FR_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -149,7 +149,7 @@
     name="FR_joint"
     type="continuous">
     <origin
-      xyz="0.28978 -0.2513 -0.1585"
+      xyz="0.082849 -0.1596 -0.1041"
       rpy="0 0 0" />
     <parent
       link="base_link" />
@@ -162,17 +162,17 @@
     name="FL_link">
     <inertial>
       <origin
-        xyz="1.3043E-07 -0.05681 1.2701E-07"
+        xyz="2.7756E-17 -0.02152 0"
         rpy="0 0 0" />
       <mass
-        value="0.70354" />
+        value="0.42795" />
       <inertia
-        ixx="0.00045383"
-        ixy="-6.7038E-10"
-        ixz="2E-08"
-        iyy="0.00059175"
-        iyz="-2.7151E-09"
-        izz="0.00045385" />
+        ixx="0.00040313"
+        ixy="2.1117E-21"
+        ixz="-2.9719E-20"
+        iyy="0.00067844"
+        iyz="-7.8622E-21"
+        izz="0.00040313" />
     </inertial>
     <visual>
       <origin
@@ -202,7 +202,7 @@
     name="FL_joint"
     type="continuous">
     <origin
-      xyz="0.28978 0.2515 -0.1585"
+      xyz="0.082849 0.1596 -0.1041"
       rpy="0 0 0" />
     <parent
       link="base_link" />
@@ -215,17 +215,17 @@
     name="BL_link">
     <inertial>
       <origin
-        xyz="1.2093E-07 -0.05681 -1.6462E-07"
+        xyz="0 -0.02152 0"
         rpy="0 0 0" />
       <mass
-        value="0.70354" />
+        value="0.42795" />
       <inertia
-        ixx="0.00045383"
-        ixy="-8.0131E-10"
-        ixz="-2.0772E-08"
-        iyy="0.00059175"
-        iyz="2.1066E-09"
-        izz="0.00045385" />
+        ixx="0.00040313"
+        ixy="3.055E-21"
+        ixz="-2.4304E-20"
+        iyy="0.00067844"
+        iyz="-8.2856E-21"
+        izz="0.00040313" />
     </inertial>
     <visual>
       <origin
@@ -255,7 +255,7 @@
     name="BL_joint"
     type="continuous">
     <origin
-      xyz="-0.26698 0.2515 -0.1585"
+      xyz="-0.082838 0.1596 -0.1041"
       rpy="0 0 0" />
     <parent
       link="base_link" />
@@ -264,9 +264,6 @@
     <axis
       xyz="0 1 0" />
   </joint>
-
-
-
 
  <joint name="imu_joint" type="fixed">
         <parent link="base_link"/>
