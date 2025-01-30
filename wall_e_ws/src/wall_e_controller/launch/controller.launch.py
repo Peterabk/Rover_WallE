@@ -137,7 +137,7 @@ def generate_launch_description():
         }.items()
     )
 
-    noisy_controller_launch = OpaqueFunction(function=noisy_controller)
+    #noisy_controller_launch = OpaqueFunction(function=noisy_controller)
 
     return LaunchDescription(
         [
@@ -151,6 +151,6 @@ def generate_launch_description():
             wheel_controller_spawner,
             simple_controller,
             twist_mux_launch,
-            noisy_controller_launch,
+            #noisy_controller_launch,
         ]
     )

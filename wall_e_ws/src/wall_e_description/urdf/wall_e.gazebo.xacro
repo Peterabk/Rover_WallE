@@ -43,49 +43,6 @@
             <mechanicalReduction>1.0</mechanicalReduction>
         </actuator>
     </transmission>
-    
-  <!-- Gazebo configuration for left front wheel -->
-  <gazebo reference="FL_link">
-        <mu1>100000000000000.0</mu1>
-        <mu2>100000000000000.0</mu2>
-        <kp>1000000000000.0</kp>
-        <kd>10.0</kd>
-  </gazebo>
-
-    <!-- Gazebo Friction Parameters for Front Right Wheel -->
-    <gazebo reference="FR_link">
-        <mu1>100000000000000.0</mu1>
-        <mu2>100000000000000.0</mu2>
-        <kp>1000000000000.0</kp>
-        <kd>10.0</kd>
-      </gazebo>
-
-    <!-- Gazebo Friction Parameters for Back Left Wheel -->
-    <gazebo reference="BL_link">
-        <mu1>100000000000000.0</mu1>
-        <mu2>100000000000000.0</mu2>
-        <kp>1000000000000.0</kp>
-        <kd>10.0</kd>
-      </gazebo>
-
-    <!-- Gazebo Friction Parameters for Back Right Wheel -->
-    <gazebo reference="BR_link">
-        <mu1>100000000000000.0</mu1>
-        <mu2>100000000000000.0</mu2>
-        <kp>1000000000000.0</kp>
-        <kd>10.0</kd>
-      </gazebo>
-
-    <!-- Gazebo Plugin for ROS2 Control -->
-    <gazebo>
-        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-            <robot_param>robot_description</robot_param>
-            <robot_param_node>robot_state_publisher</robot_param_node>
-            <!-- Correct the path to the YAML file -->
-            <parameters>$(find wall_e_controller)/config/wall_e_controllers.yaml</parameters>
-        </plugin>
-    </gazebo>
-
 
 <gazebo reference="imu_link">
       <sensor name="imu" type="imu">
