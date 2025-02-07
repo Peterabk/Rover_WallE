@@ -37,6 +37,9 @@ install(
 
 install(PROGRAMS
   ${PROJECT_NAME}/imu_republisher.py
+  ${PROJECT_NAME}/gps_waypoint_logger.py
+  ${PROJECT_NAME}/logged_waypoint_follower.py
+  ${PROJECT_NAME}/seeder_algo.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
