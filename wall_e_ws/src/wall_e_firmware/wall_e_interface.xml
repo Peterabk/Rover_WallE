@@ -1,0 +1,11 @@
+<library path="wall_e_firmware">
+    <class name="wall_e_firmware/Wall_e_Interface"
+            type="wall_e_interface::Wall_e_Interface"
+            base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Wall_e hardware interface
+        </description>
+
+    </class>
+
+</library>
