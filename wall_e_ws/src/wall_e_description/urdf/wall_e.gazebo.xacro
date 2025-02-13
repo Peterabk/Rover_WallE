@@ -44,6 +44,18 @@
         </actuator>
     </transmission>
 
+    
+
+        <!-- Gazebo Plugin for ROS2 Control -->
+  <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+          <robot_param>robot_description</robot_param>
+          <robot_param_node>robot_state_publisher</robot_param_node>
+          <!-- Correct the path to the YAML file -->
+          <parameters>$(find wall_e_controller)/config/wall_e_controllers.yaml</parameters>
+      </plugin>
+  </gazebo>
+
 <gazebo reference="imu_link">
       <sensor name="imu" type="imu">
           <always_on>true</always_on>

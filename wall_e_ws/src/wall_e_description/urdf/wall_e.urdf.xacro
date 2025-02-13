@@ -266,36 +266,6 @@
       xyz="0 1 0" />
   </joint>
 
-    <gazebo>
-    <plugin filename="libgazebo_ros_diff_drive.so" name="skid_steer_drive">
-      <!-- Update rate -->
-      <update_rate>500</update_rate>
-      <!-- Number of wheel pairs -->
-      <num_wheel_pairs>2</num_wheel_pairs>
-      <!-- wheels0 -->
-      <left_joint>FL_joint</left_joint>
-      <right_joint>FR_joint</right_joint>
-      <!-- wheels1-->
-      <left_joint>BL_joint</left_joint>
-      <right_joint>BR_joint</right_joint>
-      <!-- kinematics -->
-      <wheel_separation>0.33</wheel_separation>
-      <wheel_separation>0.33</wheel_separation>
-      <wheel_diameter>0.152</wheel_diameter>
-      <wheel_diameter>0.152</wheel_diameter>
-      <!-- limits -->
-      <max_wheel_torque>200</max_wheel_torque>
-      <max_wheel_acceleration>10.0</max_wheel_acceleration>
-      <!-- output -->
-      <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_footprint</robot_base_frame>
-      <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf>
-      <publish_wheel_tf>true</publish_wheel_tf>
-    </plugin>
-  </gazebo>
-
-
   <link
     name="IMU_link">
     <inertial>
