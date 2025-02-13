@@ -44,9 +44,7 @@
         </actuator>
     </transmission>
 
-    
-
-        <!-- Gazebo Plugin for ROS2 Control -->
+  <!-- Gazebo Plugin for ROS2 Control -->
   <gazebo>
       <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
           <robot_param>robot_description</robot_param>
@@ -102,7 +100,11 @@
               </z>
             </linear_acceleration>
           </imu>
-          <plugin name="imu" filename="libgazebo_ros_imu_sensor.so"/>
+          <plugin name="imu" filename="libgazebo_ros_imu_sensor.so">
+            <ros>
+              <remapping>~/imu:=/imu/out</remapping>
+            </ros>
+          </plugin>
       </sensor>
 </gazebo>
  <gazebo reference="gps_link">

@@ -69,7 +69,10 @@ install(TARGETS
 )
 
 #python
-
+install(
+  DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
 #end python
 
 if(BUILD_TESTING)

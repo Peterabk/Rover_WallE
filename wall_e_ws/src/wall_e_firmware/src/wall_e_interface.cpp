@@ -61,6 +61,9 @@ std::vector<hardware_interface::StateInterface> Wall_e_Interface::export_state_i
   {
     state_interfaces.emplace_back(hardware_interface::StateInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &position_states_[i]));
+
+        RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "Fetching Joint : "<< info_.joints[i].name);
+
     state_interfaces.emplace_back(hardware_interface::StateInterface(
         info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &velocity_states_[i]));
   }
@@ -78,8 +81,9 @@ std::vector<hardware_interface::CommandInterface> Wall_e_Interface::export_comma
   {
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
         info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &velocity_commands_[i]));
+        RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "velocity commands : "<< velocity_commands_[i]);
   }
-
+  RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "velocity commands size : "<< velocity_commands_.size());
   return command_interfaces;
 }
 
@@ -89,9 +93,9 @@ CallbackReturn Wall_e_Interface::on_activate(const rclcpp_lifecycle::State &)
   RCLCPP_INFO(rclcpp::get_logger("Wall_e_Interface"), "Starting robot hardware ...");
 
   // Reset commands and states
-  velocity_commands_ = { 0.0, 0.0 };
-  position_states_ = { 0.0, 0.0 };
-  velocity_states_ = { 0.0, 0.0 };
+  velocity_commands_ = { 0.0, 0.0, 0.0, 0.0 };
+  position_states_ = { 0.0, 0.0, 0.0, 0.0 };
+  velocity_states_ = { 0.0, 0.0, 0.0, 0.0 };
 
   try
   {
@@ -151,13 +155,29 @@ hardware_interface::return_type Wall_e_Interface::read(const rclcpp::Time &,
 
       if(res.at(0) == 'r')
       {
-        velocity_states_.at(0) = multiplier * std::stod(res.substr(2, res.size()));
-        position_states_.at(0) += velocity_states_.at(0) * dt;
+        if(res.at(2) == 'f')
+        {
+          velocity_states_.at(0) = multiplier * std::stod(res.substr(3, res.size()));
+          position_states_.at(0) += velocity_states_.at(0) * dt;
+        }
+        else
+        {
+          velocity_states_.at(1) = multiplier * std::stod(res.substr(3, res.size()));
+          position_states_.at(1) += velocity_states_.at(1) * dt;
+        }
       }
       else if(res.at(0) == 'l')
       {
-        velocity_states_.at(1) = multiplier * std::stod(res.substr(2, res.size()));
-        position_states_.at(1) += velocity_states_.at(1) * dt;
+        if(res.at(2) == 'f')
+        {
+          velocity_states_.at(2) = multiplier * std::stod(res.substr(3, res.size()));
+          position_states_.at(2) += velocity_states_.at(2) * dt;
+        }
+        else
+        {
+          velocity_states_.at(3) = multiplier * std::stod(res.substr(3, res.size()));
+          position_states_.at(3) += velocity_states_.at(3) * dt;
+        }
       }
     }
     last_run_ = rclcpp::Clock().now();
@@ -171,10 +191,18 @@ hardware_interface::return_type Wall_e_Interface::write(const rclcpp::Time &,
 {
   // Implement communication protocol with the Arduino
   std::stringstream message_stream;
+  RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "velocity commands size : "<< velocity_commands_.size());
   char right_wheel_sign = velocity_commands_.at(0) >= 0 ? 'p' : 'n';
-  char left_wheel_sign = velocity_commands_.at(1) >= 0 ? 'p' : 'n';
+  char left_wheel_sign = velocity_commands_.at(2) >= 0 ? 'p' : 'n';
+
+  // char right_back_wheel_sign = velocity_commands_.at(1) >= 0 ? 'p' : 'n';
+  // char left_back_wheel_sign = velocity_commands_.at(3) >= 0 ? 'p' : 'n';
+
   std::string compensate_zeros_right = "";
+  std::string compensate_zeros_right_back = "";
   std::string compensate_zeros_left = "";
+  std::string compensate_zeros_left_back = "";
+
   if(std::abs(velocity_commands_.at(0)) < 10.0)
   {
     compensate_zeros_right = "0";
@@ -183,7 +211,17 @@ hardware_interface::return_type Wall_e_Interface::write(const rclcpp::Time &,
   {
     compensate_zeros_right = "";
   }
+
   if(std::abs(velocity_commands_.at(1)) < 10.0)
+  {
+    compensate_zeros_right_back = "0";
+  }
+  else
+  {
+    compensate_zeros_right_back = "";
+  }
+
+  if(std::abs(velocity_commands_.at(2)) < 10.0)
   {
     compensate_zeros_left = "0";
   }
@@ -191,18 +229,28 @@ hardware_interface::return_type Wall_e_Interface::write(const rclcpp::Time &,
   {
     compensate_zeros_left = "";
   }
+
+  if(std::abs(velocity_commands_.at(3)) < 10.0)
+  {
+    compensate_zeros_left_back = "0";
+  }
+  else
+  {
+    compensate_zeros_left_back = "";
+  }
   
   message_stream << std::fixed << std::setprecision(2) << 
-    "r" << right_wheel_sign << compensate_zeros_right << std::abs(velocity_commands_.at(0)) << 
-    ",l" <<  left_wheel_sign << compensate_zeros_left << std::abs(velocity_commands_.at(1)) << ",";
+    "r" << right_wheel_sign << "f" <<compensate_zeros_right << std::abs(velocity_commands_.at(0)) << ",r" << right_wheel_sign << "b" << compensate_zeros_right_back << std::abs(velocity_commands_.at(1))
+    <<",l" <<  left_wheel_sign << "f" << compensate_zeros_left << std::abs(velocity_commands_.at(2)) << ",l" <<  left_wheel_sign << "b" << compensate_zeros_left_back << std::abs(velocity_commands_.at(3)) << ",";
 
   try
   {
+    RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "Fetching Joint : "<< message_stream.str());
     arduino_.Write(message_stream.str());
   }
   catch (...)
   {
-    RCLCPP_ERROR_STREAM(rclcpp::get_logger("BumperbotInterface"),
+    RCLCPP_ERROR_STREAM(rclcpp::get_logger("Wall_e_Interface"),
                         "Something went wrong while sending the message "
                             << message_stream.str() << " to the port " << port_);
     return hardware_interface::return_type::ERROR;

@@ -12,7 +12,8 @@
                 "${workspaceFolder}/src/wall_e_controller/include",
                 "/opt/ros/humble/include/rclcpp",
                 "/opt/ros/humble/include/rcl",
-                "/opt/ros/humble/include/rcutils"
+                "/opt/ros/humble/include/rcutils",
+                "${workspaceFolder}/src/wall_e_firmware/include"
             ],
             "name": "ROS",
             "intelliSenseMode": "gcc-x64",

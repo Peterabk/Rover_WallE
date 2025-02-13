@@ -25,19 +25,10 @@ install(
   DESTINATION include
 )
 
-install(TARGETS
-  imu_republisher
-  DESTINATION lib/${PROJECT_NAME}
-)
-
 install(
   DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(PROGRAMS
-  ${PROJECT_NAME}/imu_republisher.py
-  DESTINATION lib/${PROJECT_NAME}
-)
 
 ament_package()

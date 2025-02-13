@@ -1,9 +1,19 @@
 <robot name="wall_e" xmlns:xacro="http://www.ros.org/wiki/xacro">
-
     <ros2_control type="system" name="RobotSystem">
-        <hardware>
-            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-        </hardware>
+        <!-- ros2_control Gazebo -->
+        <xacro:if value="$(arg is_sim)">
+            <hardware>
+                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            </hardware>
+        </xacro:if>
+
+        <!-- ros2_control Real Robot -->
+        <xacro:unless value="$(arg is_sim)">
+            <hardware>
+                <plugin>wall_e_firmware/Wall_e_Interface</plugin>
+                <param name="port">/dev/ttyUSB0</param>
+            </hardware>
+        </xacro:unless>
 
         <joint name="FR_joint">
             <command_interface name="velocity">
