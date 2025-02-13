@@ -191,7 +191,7 @@ hardware_interface::return_type Wall_e_Interface::write(const rclcpp::Time &,
 {
   // Implement communication protocol with the Arduino
   std::stringstream message_stream;
-  RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "velocity commands size : "<< velocity_commands_.size());
+  //RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "velocity commands size : "<< velocity_commands_.size());
   char right_wheel_sign = velocity_commands_.at(0) >= 0 ? 'p' : 'n';
   char left_wheel_sign = velocity_commands_.at(2) >= 0 ? 'p' : 'n';
 
@@ -245,7 +245,7 @@ hardware_interface::return_type Wall_e_Interface::write(const rclcpp::Time &,
 
   try
   {
-    RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "Fetching Joint : "<< message_stream.str());
+    //RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "Fetching Joint : "<< message_stream.str());
     arduino_.Write(message_stream.str());
   }
   catch (...)
