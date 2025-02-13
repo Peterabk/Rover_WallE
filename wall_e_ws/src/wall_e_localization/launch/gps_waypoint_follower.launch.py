@@ -51,7 +51,7 @@ def generate_launch_description():
             os.path.join(bringup_dir, "launch", "navigation_launch.py")
         ),
         launch_arguments={
-            "use_sim_time": "True",
+            "use_sim_time": "False",
             "params_file": configured_params,
             "autostart": "True",
         }.items(),
@@ -73,7 +73,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     # simulator launch
-    ld.add_action(gazebo_cmd)
+    #ld.add_action(gazebo_cmd)
 
     # robot localization launch
     ld.add_action(robot_localization_cmd)

@@ -117,12 +117,19 @@ ekf_filter_node_map:
 navsat_transform:
   ros__parameters:
     frequency: 30.0
+    publish_tf: true
     delay: 3.0
     magnetic_declination_radians: 0.0
     yaw_offset: 0.0
     zero_altitude: true
+    broadcast_utm_transform: true
     broadcast_cartesian_transform: true
     publish_filtered_gps: true
     wait_for_datum: true
     datum: [-1.7316849822423605e-07, -1.9630770810169198e-07, 0.0]
     use_odometry_yaw: true
+
+    odom_frame: "odom"  # This should match your EKF's odom_frame
+    base_link_frame: "base_footprint"  # Ensure this matches your robot's base frame
+    world_frame: "odom"  # This should match the world frame used by EKF
+    publish_tf: true
