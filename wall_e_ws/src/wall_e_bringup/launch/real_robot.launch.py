@@ -1,4 +1,5 @@
 import os
+import subprocess
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch_ros.actions import Node
@@ -36,6 +37,18 @@ def generate_launch_description():
             "use_sim_time": "False"
         }.items()
     )
+
+    # Command to run the node in a new terminal
+    command = "ros2 run wall_e_firmware imu_serial_receiver"
+
+    # Open a new terminal and execute the command
+    subprocess.Popen(["xterm", "-e", f"bash -c '{command}; exec bash'"])
+
+    # Command to run the node in a new terminal
+    command_two = "ros2 run wall_e_localization gps_reader.py"
+
+    # Open a new terminal and execute the command
+    subprocess.Popen(["xterm", "-e", f"bash -c '{command_two}; exec bash'"])
 
     return LaunchDescription([
         hardware_interface,
