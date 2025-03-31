@@ -63,6 +63,7 @@ public:
         imu_message.angular_velocity.z = std::stof(data_parts[5]);
         // Publish the IMU message
         pub_->publish(imu_message);
+        RCLCPP_INFO_STREAM(this->get_logger(), "IMU data: " << imu_string_data.c_str());
     }
     catch (const std::exception &e)
     {

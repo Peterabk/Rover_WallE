@@ -44,7 +44,7 @@ def generate_launch_description():
 
     robot_localization_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, 'dual_ekf_navsat.launch.py'))
+            os.path.join(launch_dir, 'ekf_navsat.launch.py'))
     )
 
     navigation2_cmd = IncludeLaunchDescription(
@@ -69,10 +69,7 @@ def generate_launch_description():
     #         os.path.join(launch_dir, 'mapviz.launch.py')),
     #     condition=IfCondition(use_mapviz)
     # )
-
-    command = "ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom"
-    subprocess.Popen(["xterm", "-e", f"bash -c '{command}; exec bash'"])
-
+    
     # Create the launch description and populate
     ld = LaunchDescription()
 
@@ -92,3 +89,6 @@ def generate_launch_description():
     #ld.add_action(mapviz_cmd)
 
     return ld
+
+command = "ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map odom"
+subprocess.Popen(["xterm", "-e", f"bash -c '{command}; exec bash'"])
