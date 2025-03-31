@@ -146,6 +146,9 @@ hardware_interface::return_type Wall_e_Interface::read(const rclcpp::Time &,
     auto dt = (rclcpp::Clock().now() - last_run_).seconds();
     std::string message;
     arduino_.ReadLine(message);
+
+    RCLCPP_INFO_STREAM(rclcpp::get_logger("Wall_e_Interface"), "Arduino : "<< message);
+
     std::stringstream ss(message);
     std::string res;
     int multiplier = 1;
@@ -181,6 +184,10 @@ hardware_interface::return_type Wall_e_Interface::read(const rclcpp::Time &,
       }
     }
     last_run_ = rclcpp::Clock().now();
+  }
+  else
+  {
+    RCLCPP_INFO(rclcpp::get_logger("Wall_e_Interface"), "No Arduino Serial");
   }
   return hardware_interface::return_type::OK;
 }
@@ -240,8 +247,7 @@ hardware_interface::return_type Wall_e_Interface::write(const rclcpp::Time &,
   }
   
   message_stream << std::fixed << std::setprecision(2) << 
-    "r" << right_wheel_sign << "f" <<compensate_zeros_right << std::abs(velocity_commands_.at(0)) << ",r" << right_wheel_sign << "b" << compensate_zeros_right_back << std::abs(velocity_commands_.at(1))
-    <<",l" <<  left_wheel_sign << "f" << compensate_zeros_left << std::abs(velocity_commands_.at(2)) << ",l" <<  left_wheel_sign << "b" << compensate_zeros_left_back << std::abs(velocity_commands_.at(3)) << ",";
+    "r" << right_wheel_sign << "f" <<compensate_zeros_right << std::abs(velocity_commands_.at(0)) <<",l" <<  left_wheel_sign << "f" << compensate_zeros_left << std::abs(velocity_commands_.at(2)) << ",l" <<  left_wheel_sign << "b" << compensate_zeros_left_back << std::abs(velocity_commands_.at(3)) << ",";
 
   try
   {
