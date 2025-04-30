@@ -1,88 +1,128 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <robot name="wall_e" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <!--
-    <transmission name="front_wheel_right_transmission">
-        <plugin>transmission_interface/SimpleTransmission</plugin>
-        <joint name="front_right_wheel" role="joint_right">
-            <mechanical_reduction>1.0</mechanical_reduction>
+    <!-- Transmission for Front Right Wheel -->
+    <transmission name="FR_Transmission">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="FR_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
         </joint>
-        <actuator name="front_right_wheel_motor" role="actuator_right"/>
+        <actuator name="FR_Motor">
+            <mechanicalReduction>1.0</mechanicalReduction>
+        </actuator>
     </transmission>
 
-    <transmission name="back_wheel_right_transmission">
-        <plugin>transmission_interface/SimpleTransmission</plugin>
-        <joint name="back_right_wheel" role="joint_right">
-            <mechanical_reduction>1.0</mechanical_reduction>
+    <!-- Transmission for Back Right Wheel -->
+    <transmission name="BR_Transmission">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="BR_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
         </joint>
-        <actuator name="back_right_wheel_motor" role="actuator_right"/>
+        <actuator name="BR_Motor">
+            <mechanicalReduction>1.0</mechanicalReduction>
+        </actuator>
     </transmission>
 
-    <transmission name="front_wheel_left_transmission">
-        <plugin>transmission_interface/SimpleTransmission</plugin>
-        <joint name="front_left_wheel" role="joint_left">
-            <mechanical_reduction>1.0</mechanical_reduction>
+    <!-- Transmission for Front Left Wheel -->
+    <transmission name="FL_Transmission">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="FL_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
         </joint>
-        <actuator name="front_left_wheel_motor" role="actuator_left"/>
+        <actuator name="FL_Motor">
+            <mechanicalReduction>1.0</mechanicalReduction>
+        </actuator>
     </transmission>
 
-    <transmission name="back_wheel_left_transmission">
-        <plugin>transmission_interface/SimpleTransmission</plugin>
-        <joint name="back_left_wheel" role="joint_left">
-            <mechanical_reduction>1.0</mechanical_reduction>
+    <!-- Transmission for Back Left Wheel -->
+    <transmission name="BL_Transmission">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="BL_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
         </joint>
-        <actuator name="back_left_wheel_motor" role="actuator_left"/>
+        <actuator name="BL_Motor">
+            <mechanicalReduction>1.0</mechanicalReduction>
+        </actuator>
     </transmission>
-    -->
-    <gazebo reference="Front_Right_Wheel">
-        <mu1>100000000000000.0</mu1>
-        <mu2>100000000000000.0</mu2>
-        <kp>1000000000000.0</kp>
-        <kd>10.0</kd>
-        <minDepth>0.001</minDepth>
-        <maxVel>0.1</maxVel>
-        <fdir1>1 0 0</fdir1>
-    </gazebo>
 
-    <gazebo reference="Front_Left_Wheel">
-        <mu1>100000000000000.0</mu1>
-        <mu2>100000000000000.0</mu2>
-        <kp>1000000000000.0</kp>
-        <kd>10.0</kd>
-        <minDepth>0.001</minDepth>
-        <maxVel>0.1</maxVel>
-        <fdir1>1 0 0</fdir1>
-    </gazebo>
+<gazebo reference="imu_link">
+      <sensor name="imu" type="imu">
+          <always_on>true</always_on>
+          <update_rate>100</update_rate>
+          <imu>
+            <angular_velocity>
+              <x>
+                <noise type="gaussian">
+                  <mean>0.0</mean>
+                  <stddev>2e-4</stddev>
+                </noise>
+              </x>
+              <y>
+                <noise type="gaussian">
+                  <mean>0.0</mean>
+                  <stddev>2e-4</stddev>
+                </noise>
+              </y>
+              <z>
+                <noise type="gaussian">
+                  <mean>0.0</mean>
+                  <stddev>2e-4</stddev>
+                </noise>
+              </z>
+            </angular_velocity>
+            <linear_acceleration>
+              <x>
+                <noise type="gaussian">
+                  <mean>0.0</mean>
+                  <stddev>1.7e-2</stddev>
+                </noise>
+              </x>
+              <y>
+                <noise type="gaussian">
+                  <mean>0.0</mean>
+                  <stddev>1.7e-2</stddev>
+                </noise>
+              </y>
+              <z>
+                <noise type="gaussian">
+                  <mean>0.0</mean>
+                  <stddev>1.7e-2</stddev>
+                </noise>
+              </z>
+            </linear_acceleration>
+          </imu>
+          <plugin name="imu" filename="libgazebo_ros_imu_sensor.so"/>
+      </sensor>
+</gazebo>
+ <gazebo reference="gps_link">
 
-    <gazebo reference="Back_Right_Wheel">
-        <mu1>100000000000000.0</mu1>
-        <mu2>100000000000000.0</mu2>
-        <kp>1000000000000.0</kp>
-        <kd>10.0</kd>
-        <minDepth>0.001</minDepth>
-        <maxVel>0.1</maxVel>
-        <fdir1>1 0 0</fdir1>
-    </gazebo>
-
-    <gazebo reference="Back_Left_Wheel">
-        <mu1>100000000000000.0</mu1>
-        <mu2>100000000000000.0</mu2>
-        <kp>1000000000000.0</kp>
-        <kd>10.0</kd>
-        <minDepth>0.001</minDepth>
-        <maxVel>0.1</maxVel>
-        <fdir1>1 0 0</fdir1>
-    </gazebo>
-
-    <!-- 
-    <gazebo>
-        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-            <robot_param>robot_description</robot_param>
-            <robot_param_node>robot_state_publisher</robot_param_node>
-            <parameters>$(find bumperbot_controller)/config/bumperbot_controllers.yaml</parameters>
+      <sensor name="tb3_gps" type="gps">
+        <always_on>true</always_on>
+        <update_rate>1</update_rate>
+        <pose>0 0 0 0 0 0</pose>
+        <gps>
+          <position_sensing>
+            <horizontal>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </horizontal>
+            <vertical>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </vertical>
+          </position_sensing>
+        </gps>
+        <plugin name="my_gps_plugin" filename="libgazebo_ros_gps_sensor.so">
+          <ros>
+            <remapping>~/out:=/gps/fix</remapping>
+          </ros>
         </plugin>
-    </gazebo>
-    -->
+      </sensor>
 
-</robot>
+    </gazebo>
+
+
+    </robot>
